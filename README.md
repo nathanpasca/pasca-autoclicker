@@ -11,7 +11,6 @@
 
 - 🎯 **Tahan untuk Klik**: Tahan tombol kiri mouse untuk mulai auto-click, lepas untuk berhenti
 - ⚡ **Performa Tinggi**: Threading yang dioptimasi dengan timing presisi nanosecond
-- 🎨 **UI Modern Gelap**: Interface yang elegan dengan statistik real-time
 - 📊 **Statistik Real-time**: Monitor CPS langsung, penghitung klik, dan durasi sesi
 - 🎲 **Kontrol Jitter**: Tambahkan randomisasi gerakan mouse yang natural
 - 🇮🇩 **Interface Indonesia**: Sepenuhnya dalam Bahasa Indonesia
