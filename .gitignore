@@ -18,6 +18,8 @@ buildNumber.properties
 
 # Package Files
 *.jar
+!release-files/*.jar
+!dist/*.jar
 *.war
 *.nar
 *.ear
@@ -29,7 +31,7 @@ buildNumber.properties
 hs_err_pid*
 replay_pid*
 
-# IDE
+# IDE Files
 .idea/
 *.iws
 *.iml
@@ -37,6 +39,7 @@ replay_pid*
 .vscode/
 *.swp
 *.swo
+*~
 
 # Eclipse
 .apt_generated
@@ -67,10 +70,91 @@ ehthumbs.db
 Thumbs.db
 
 # Temporary files
-*~
 *.tmp
 *.temp
+*.bak
+*.swp
+*.swo
+
+# Release and distribution files (Phase 1 specific)
+release-files/
+dist/
+*.zip
+releases/
 
 # Application specific
 config.properties
 settings.dat
+user.preferences
+*.conf
+
+# Security and credentials
+*.key
+*.pem
+*.p12
+*.jks
+secrets.properties
+.env
+.env.local
+
+# Build and deployment
+deploy/
+staging/
+production/
+
+# Documentation generation
+docs/build/
+site/
+
+# Coverage reports
+*.lcov
+coverage/
+jacoco/
+
+# Performance profiling
+*.hprof
+*.prof
+
+# JVM debugging
+javacore.*
+Snap.*
+core.*
+
+# Gradle (if someone wants to use it)
+.gradle
+/build/
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
+# Application logs
+application.log
+app.log
+error.log
+debug.log
+
+# Screenshot/demo files (exclude from repo)
+screenshots/
+demo/
+*.png
+*.jpg
+*.gif
+!src/main/resources/*.png
+!docs/*.png
+!.github/*.png
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+.Trashes
+
+# Linux specific
+*~
+.nfs*

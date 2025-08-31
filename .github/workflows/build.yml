@@ -1,0 +1,84 @@
+name: Build dan Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "temurin"
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Build with Maven
+        run: mvn clean compile
+
+      - name: Run tests
+        run: mvn test
+
+      - name: Package
+        run: mvn clean package
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: PascaAutoClicker-jar
+          path: target/PascaAutoClicker.jar
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "temurin"
+
+      - name: Build release
+        run: mvn clean package
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/PascaAutoClicker.jar
+          generate_release_notes: true
+          body: |
+            🎉 **Pasca AutoClicker Release**
+
+            **Cara Install:**
+            1. Download `PascaAutoClicker.jar`
+            2. Pastikan Java 11+ terinstall
+            3. Jalankan: `java -jar PascaAutoClicker.jar`
+
+            **Changelog:**
+            - Lihat commit history untuk detail perubahan
+
+            ---
+            💡 **Tips**: Jalankan sebagai Administrator untuk performa terbaik!
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
